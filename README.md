@@ -25,6 +25,7 @@ Server will be available at `https://chenling.localhost.run/api/`
 The spatial arrangement of objects.
 
 ## Fun things to add
+- Bonus SVGs triggered by words like Vanderbilt, Vandy, VH.
 - Language support
 - Amazon Alexa control
 - Style transformation of the final product (https://github.com/lengstrom/fast-style-transfer)
