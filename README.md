@@ -32,3 +32,4 @@ The spatial arrangement of objects.
 ## Maybe useful tutorials
 - [using-voice-commands-to-control-a-website-with-amazon-echo-alexa](https://medium.com/@sjur/using-voice-commands-to-control-a-website-with-amazon-echo-alexa-part-2-6-966d596d80b0])
 - [Embed SVG to React](https://stackoverflow.com/questions/23402542/embedding-svg-into-reactjs)
+- [React fetch data async](https://github.com/reactjs/rfcs/issues/26)
