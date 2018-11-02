@@ -28,3 +28,7 @@ The spatial arrangement of objects.
 - Language support
 - Amazon Alexa control
 - Style transformation of the final product (https://github.com/lengstrom/fast-style-transfer)
+
+## Maybe useful tutorials
+- [using-voice-commands-to-control-a-website-with-amazon-echo-alexa](https://medium.com/@sjur/using-voice-commands-to-control-a-website-with-amazon-echo-alexa-part-2-6-966d596d80b0])
+- [Embed SVG to React](https://stackoverflow.com/questions/23402542/embedding-svg-into-reactjs)
