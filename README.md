@@ -1,4 +1,4 @@
-# illustrAItrion
+# illustrAItion
 Project for Vandy hacks V
 
 
