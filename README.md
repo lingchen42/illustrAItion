@@ -3,11 +3,12 @@ Project for Vandy hacks V
 
 
 ## Backend
-### Connect the backend server through `https://chenling.localhost.run/api/` <br>
+### Connect the backend server  <br>
 Connect the local server to local run through
 ```
 ssh -R 80:localhost:8000 ssh.localhost.run
 ```
+Server will be available at `https://chenling.localhost.run/api/`
 - Processing the API call
   - Sentence to words with positional information (Syntax Tree? Preposition of location?)
   - Use word2vec (gensim library) to fetch the closest object from database
