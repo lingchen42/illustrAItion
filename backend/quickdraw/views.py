@@ -85,11 +85,11 @@ def phrase2Strokes(object1,object2,loc): #object = dict key, loc= value
     location = locationDict(loc)
     print(object1, object2, location)
     if location == "up":
-        strokes = word2Strokes(object2)
-        strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"y"),"y"))
-    elif location == "down":
         strokes = word2Strokes(object1)
         strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"y"))
+    elif location == "down":
+        strokes = word2Strokes(object2)
+        strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"y"),"y"))
     elif location == "right":
         strokes = word2Strokes(object1)
         strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"x"))
@@ -115,7 +115,7 @@ def DetailDrawing(request, sentence, format=None):
         print(mapped_locs_d[key])
         strokes = phrase2Strokes(key,mapped_locs_d[key][0][0],mapped_locs_d[key][0][1])
     path = strokes2svgpath(strokes)
-    return Response(path)
+    return Response([path])
     #except:
          # TO DO better error handling
     #    return Response("M150 0 L75 200 L225 200 Z")
