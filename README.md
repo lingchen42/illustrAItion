@@ -29,6 +29,7 @@ The spatial arrangement of objects.
 - Language support 
 - Amazon Alexa control
 - Style transformation of the final product (https://github.com/lengstrom/fast-style-transfer) **Laura**
+- Octocat + Vandy Hacks design
 
 ## Maybe useful tutorials
 - [using-voice-commands-to-control-a-website-with-amazon-echo-alexa](https://medium.com/@sjur/using-voice-commands-to-control-a-website-with-amazon-echo-alexa-part-2-6-966d596d80b0])
