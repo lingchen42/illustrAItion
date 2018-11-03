@@ -53,15 +53,22 @@ def process_sentence(sentence):
         mapped_locs_d[key] = item
     return mapped_locs_d
 
-def word2Path(word):
+def word2Strokes(word):
     d = Drawing.objects.filter(word=word).order_by('?').first()
     serializer = DrawingSerializer(d)
     strokes = serializer.data['drawing']
-    path = strokes2svgpath(strokes)
-    return path
+    return strokes
 
-def phrase2SVG(object,loc): #object = dict key, loc= value
-    print(word2Path(object))
+def locationDict(preposition): # maps prepositions to directions
+    dict = {"on" : ["up"], "above":["up"],"under" : ["down"], "beneath":["down"],"beside":["right","left"]}
+    try:
+        return random.choice(dict[preposition])
+    except:
+        return "right"
+
+def phrase2Strokes(object,loc): #object = dict key, loc= value
+    strokes = word2Strokes(object)
+    print(strokes)
 
 
 @api_view(['GET'])
@@ -74,13 +81,15 @@ def DetailDrawing(request, sentence, format=None):
 #    return Response(mapped_locs_d)
     # TEMP USE
     word = list(mapped_locs_d.keys())[0]
+    # test combining 2 pictures
     for key in mapped_locs_d.keys():
-        phrase2SVG(key,mapped_locs_d[key])
+        phrase2Strokes(key,mapped_locs_d[key])
 
     try:
         #get by word
         strokes = word2Path(word)
-        return Response(strokes)
+        path = strokes2svgpath(strokes)
+        return Response(path)
     except:
          # TO DO better error handling
         return Response("M150 0 L75 200 L225 200 Z")
