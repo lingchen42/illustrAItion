@@ -87,7 +87,7 @@ def DetailDrawing(request, sentence, format=None):
 
     try:
         #get by word
-        strokes = word2Path(word)
+        strokes = word2Strokes(word)
         path = strokes2svgpath(strokes)
         return Response(path)
     except:
