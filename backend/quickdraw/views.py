@@ -64,7 +64,7 @@ def DetailDrawing(request, sentence, format=None):
     mapped_locs_d = process_sentence(sentence)
 #    return Response(mapped_locs_d)
     # TEMP USE
-    word = mapped_locs_d.keys[0]
+    word = list(mapped_locs_d.keys())[0]
 
     try:
         #get by word
