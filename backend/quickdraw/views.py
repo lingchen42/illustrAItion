@@ -55,10 +55,16 @@ def word2Strokes(word):
     d = Drawing.objects.filter(word=word).order_by('?').first()
     serializer = DrawingSerializer(d)
     strokes = serializer.data['drawing']
-    return ast.literal_eval(strokes)
+    print(strokes)
+    if isinstance(strokes, str):
+        strokes = ast.literal_eval(strokes)
+    return strokes
 
 def locationDict(preposition): # maps prepositions to directions
-    dict = {"on" : ["up"], "above":["up"],"under" : ["down"], "beneath":["down"],"beside":["right","left"],"alone":["alone"]}
+    dict = {"on" : ["up"], "above":["up"],"under" : ["down"],"below":["down"],
+        "beneath":["down"],"beside":["right","left"],"by":["left","right"],
+        "against":["right","left"],"before":["left","right"],"after":["left","right"],
+        "over":["up"],"alone":["alone"]}
     try:
         return random.choice(dict[preposition])
     except:
@@ -91,11 +97,11 @@ def phrase2Strokes(object1,object2,loc): #object = dict key, loc= value
         strokes = word2Strokes(object2)
         strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"y"),"y"))
     elif location == "right":
-        strokes = word2Strokes(object1)
-        strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"x"))
-    elif location == "left":
         strokes = word2Strokes(object2)
         strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"x"),"x"))
+    elif location == "left":
+        strokes = word2Strokes(object1)
+        strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"x"))
     else:
         strokes = word2Strokes(object1)
     return strokes
@@ -108,12 +114,18 @@ def DetailDrawing(request, sentence, format=None):
     """
     # TO DO tokenize, word2vector processing
     mapped_locs_d = process_sentence(sentence)
-
+    print(mapped_locs_d)
     #try:
-        #get by word
-    for key in mapped_locs_d.keys():
-        print(mapped_locs_d[key])
-        strokes = phrase2Strokes(key,mapped_locs_d[key][0][0],mapped_locs_d[key][0][1])
+    drawn = []
+    strokes = []
+    for word1 in mapped_locs_d.keys():
+        if word1 not in drawn:
+            drawn.append(word1)
+            print(mapped_locs_d[word1])
+            for pair in mapped_locs_d[word1]:
+                if pair[0] not in drawn:
+                    drawn.append(pair[0])
+                    strokes.extend(phrase2Strokes(word1,pair[0],pair[1]))
     path = strokes2svgpath(strokes)
     return Response([path])
     #except:
