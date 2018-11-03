@@ -31,16 +31,16 @@ def most_similar_word(word):
 def strokes2svgpath(strokes):
     if isinstance(strokes, str):
         strokes = ast.literal_eval(strokes)
-    
+
     svg_path = []
     for stroke in strokes:
         for ith, pos in enumerate(zip(stroke[0], stroke[1])):
             if ith == 0:
                 p = "M%s %s"%(pos[0], pos[1])
             else:
-                p = "L%s %s"%(pos[0], pos[1]) 
+                p = "L%s %s"%(pos[0], pos[1])
             svg_path.append(p)
-    
+
     return " ".join(svg_path)
 
 
@@ -53,6 +53,15 @@ def process_sentence(sentence):
         mapped_locs_d[key] = item
     return mapped_locs_d
 
+def word2Path(word):
+    d = Drawing.objects.filter(word=word).order_by('?').first()
+    serializer = DrawingSerializer(d)
+    strokes = serializer.data['drawing']
+    path = strokes2svgpath(strokes)
+    return path
+
+def phrase2SVG(object,loc): #object = dict key, loc= value
+    print(word2Path(object))
 
 
 @api_view(['GET'])
@@ -65,13 +74,12 @@ def DetailDrawing(request, sentence, format=None):
 #    return Response(mapped_locs_d)
     # TEMP USE
     word = list(mapped_locs_d.keys())[0]
+    for key in mapped_locs_d.keys():
+        phrase2SVG(key,mapped_locs_d[key])
 
     try:
         #get by word
-        d = Drawing.objects.filter(word=word).order_by('?').first()
-        serializer = DrawingSerializer(d)
-        strokes = serializer.data['drawing']
-        strokes = strokes2svgpath(strokes)
+        strokes = word2Path(word)
         return Response(strokes)
     except:
          # TO DO better error handling
