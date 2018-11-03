@@ -63,10 +63,10 @@ def DetailDrawing(request, sentence, format=None):
     # TO DO tokenize, word2vector processing
     mapped_locs_d = process_sentence(sentence)
 #    return Response(mapped_locs_d)
-    # TEMP USE
-    word = list(mapped_locs_d.keys())[0]
 
     try:
+        # TEMP USE
+        word = list(mapped_locs_d.keys())[0]
         #get by word
         d = Drawing.objects.filter(word=word).order_by('?').first()
         serializer = DrawingSerializer(d)
