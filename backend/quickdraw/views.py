@@ -29,9 +29,6 @@ def most_similar_word(word):
 
 
 def strokes2svgpath(strokes):
-    if isinstance(strokes, str):
-        strokes = ast.literal_eval(strokes)
-
     svg_path = []
     for stroke in strokes:
         for ith, pos in enumerate(zip(stroke[0], stroke[1])):
@@ -57,17 +54,35 @@ def word2Strokes(word):
     d = Drawing.objects.filter(word=word).order_by('?').first()
     serializer = DrawingSerializer(d)
     strokes = serializer.data['drawing']
-    return strokes
+    return ast.literal_eval(strokes)
 
 def locationDict(preposition): # maps prepositions to directions
-    dict = {"on" : ["up"], "above":["up"],"under" : ["down"], "beneath":["down"],"beside":["right","left"]}
+    dict = {"on" : ["up"], "above":["up"],"under" : ["down"], "beneath":["down"],"beside":["right","left"],"alone":["alone"]}
     try:
         return random.choice(dict[preposition])
     except:
-        return "right"
+        return "alone"
 
-def phrase2Strokes(object,loc): #object = dict key, loc= value
-    strokes = word2Strokes(object)
+def getMaxBound(strokes,coord):
+    max = 0
+    if coord == "x":
+        max = max([max(stroke[0]) for stroke in strokes])
+    else:
+        max = max([max(stroke[1]) for stroke in strokes])
+    return max
+
+def adjustStrokes(strokes, amount, coord):
+    if coord == "x":
+        for stroke in strokes:
+            stroke[0] = [x+amount for x in stroke[0]]
+    else:
+        for stroke in strokes:
+            stroke[1] = [y+amount for y in stroke[1]]
+
+def phrase2Strokes(object1,object2,loc): #object = dict key, loc= value
+    location = locationDict(loc)
+    
+    strokes = word2Strokes(object1)
     print(strokes)
 
 
