@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #e6e7e5;
+}
+
+.logo{
+  top: 10px;
+  height: 10vh;
+}
+
+.field {
+  width: 30%;
+  height: 80vh;
+  top: 2vh;
+  display: inline-block;
+  border-radius: 4px;
+  position: relative;
+  background-color: #373640;
+  transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;
+}
+
+.field:hover {
+  background-color: rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+}
+
+.field.active {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+.field.active input {
+  padding: 20px 16px 8px 16px;
+}
+
+.field.active input + label {
+  top: 4px;
+  opacity: 1;
+  color: #005792;
+}
+
+.field.locked {
+  pointer-events: none;
+}
+
+.field input {
+  width: 50%;
+  height: 90vh;
+  position: absolute;
+  float: left;
+  padding: 0px 16px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+  color: #282828;
+  outline: none;
+  box-shadow: 0px 4px 20px 0px transparent;
+  transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out,
+    0.1s padding ease-in-out;
+  -webkit-appearance: none;
+}
+
+.field input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.field input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.field input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.field input:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.field input + label {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 60px;
+  color: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.1s all ease-in-out;
+}
+
+.field input + label.error {
+  color: #ec392f;
+}
+
+.field p.predicted {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #e0e0e0;
+  opacity: 1;
+  pointer-events: none;
+}
+
+
+.drawarea{
+  margin: auto;
+  float: right;
+  top: 2vh;
+  width: 70%;
+  height: 80vh;
+  border-radius: 4px;
+  position: relative;
+  background-color: #e6e7e5;
+  transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;
+}
+
+
+svg {
+  width: 500px;
+  height: 500px;
+  display: block;
+  margin: auto;
+  // position: absolute;
+  animation: spin infinite 20s linear;
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  path {
+    stroke-width: 3;
+    stroke: black;
+    fill: none;
+  }
+}
