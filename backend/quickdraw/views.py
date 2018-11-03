@@ -3,6 +3,7 @@ from django.conf import settings
 import ast
 import json
 import numpy as np
+import random
 from quickdraw.models import Drawing
 from quickdraw.serializers import DrawingSerializer
 from rest_framework.decorators import api_view
@@ -64,12 +65,12 @@ def locationDict(preposition): # maps prepositions to directions
         return "alone"
 
 def getMaxBound(strokes,coord):
-    max = 0
+    mx = 0
     if coord == "x":
-        max = max([max(stroke[0]) for stroke in strokes])
+        mx = max([max(stroke[0]) for stroke in strokes])
     else:
-        max = max([max(stroke[1]) for stroke in strokes])
-    return max
+        mx = max([max(stroke[1]) for stroke in strokes])
+    return mx
 
 def adjustStrokes(strokes, amount, coord):
     if coord == "x":
@@ -78,12 +79,26 @@ def adjustStrokes(strokes, amount, coord):
     else:
         for stroke in strokes:
             stroke[1] = [y+amount for y in stroke[1]]
+    return strokes
 
 def phrase2Strokes(object1,object2,loc): #object = dict key, loc= value
     location = locationDict(loc)
-    
-    strokes = word2Strokes(object1)
-    print(strokes)
+    print(object1, object2, location)
+    if location == "up":
+        strokes = word2Strokes(object2)
+        strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"y"),"y"))
+    elif location == "down":
+        strokes = word2Strokes(object1)
+        strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"y"))
+    elif location == "right":
+        strokes = word2Strokes(object1)
+        strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"x"))
+    elif location == "left":
+        strokes = word2Strokes(object2)
+        strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"x"),"x"))
+    else:
+        strokes = word2Strokes(object1)
+    return strokes
 
 
 @api_view(['GET'])
@@ -93,18 +108,17 @@ def DetailDrawing(request, sentence, format=None):
     """
     # TO DO tokenize, word2vector processing
     mapped_locs_d = process_sentence(sentence)
-#    return Response(mapped_locs_d)
 
-    try:
-        # TEMP USE
-        word = list(mapped_locs_d.keys())[0]
+    #try:
         #get by word
-        strokes = word2Strokes(word)
-        path = strokes2svgpath(strokes)
-        return Response(path)
-    except:
+    for key in mapped_locs_d.keys():
+        print(mapped_locs_d[key])
+        strokes = phrase2Strokes(key,mapped_locs_d[key][0][0],mapped_locs_d[key][0][1])
+    path = strokes2svgpath(strokes)
+    return Response(path)
+    #except:
          # TO DO better error handling
-        return Response("M150 0 L75 200 L225 200 Z")
+    #    return Response("M150 0 L75 200 L225 200 Z")
 
 
 class DrawingList(generics.ListCreateAPIView):
