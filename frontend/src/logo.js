@@ -1,10 +1,13 @@
 import React from 'react';
+import SVG from 'react-inlinesvg';
+import logosvg from './assets/logo.svg'
+
 
 class Logo extends React.Component {
     render() {
         return(
             <div className='logo'>
-                <h2> Quick Draw Story Logo </h2>
+                <SVG className='logosvg' src={logosvg}></SVG>
             </div>
         );
     }

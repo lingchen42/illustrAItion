@@ -7,14 +7,23 @@ body {
 }
 
 .logo{
-  top: 10px;
-  height: 10vh;
+  width: 20%;
+  height: 25vh;
+  float: left;
+  margin-top: 2vh;
+  margin-left: 2%;
+}
+
+.logosvg{
+  width: 250px;
+  height: 250px;
+  display: block;
 }
 
 .field {
-  width: 30%;
-  height: 80vh;
-  top: 2vh;
+  width: 75%;
+  margin-top: 3vh;
+  height: 20vh;
   display: inline-block;
   border-radius: 4px;
   position: relative;
@@ -47,8 +56,8 @@ body {
 }
 
 .field input {
-  width: 50%;
-  height: 90vh;
+  width: 70%;
+  height: 20vh;
   position: absolute;
   float: left;
   padding: 0px 16px;
@@ -115,32 +124,39 @@ body {
 .drawarea{
   margin: auto;
   float: right;
-  top: 2vh;
-  width: 70%;
-  height: 80vh;
+  top: 5vh;
+  width: 100%;
+  height: 70vh;
   border-radius: 4px;
   position: relative;
   background-color: #e6e7e5;
   transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;
 }
 
-
-svg {
+.drawsvg {
   width: 500px;
   height: 500px;
   display: block;
   margin: auto;
   // position: absolute;
-  animation: spin infinite 20s linear;
+//  animation: spin infinite 20s linear;
 
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+  // @keyframes spin {
+  //   from { transform: rotate(0deg); }
+  //   to { transform: rotate(360deg); }
+  // }
 
   path {
     stroke-width: 3;
     stroke: black;
     fill: none;
   }
+}
+
+.hacklogo {
+  margin-top: 20vh;  
+}
+
+.hacklogosvg {
+  width: 200px;
 }

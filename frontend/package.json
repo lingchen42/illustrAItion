@@ -10,6 +10,7 @@
     "react-data-fetching": "^0.2.4",
     "react-dom": "^16.6.0",
     "react-hot-loader": "^4.3.11",
+    "react-inlinesvg": "^0.8.2",
     "react-motion": "^0.5.2",
     "react-mt-svg-lines": "^0.9.0",
     "react-scripts": "2.0.5",
@@ -29,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "svg-inline-loader": "^0.8.0"
+  }
 }
