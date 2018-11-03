@@ -31,16 +31,16 @@ def most_similar_word(word):
 def strokes2svgpath(strokes):
     if isinstance(strokes, str):
         strokes = ast.literal_eval(strokes)
-    
+
     svg_path = []
     for stroke in strokes:
         for ith, pos in enumerate(zip(stroke[0], stroke[1])):
             if ith == 0:
                 p = "M%s %s"%(pos[0], pos[1])
             else:
-                p = "L%s %s"%(pos[0], pos[1]) 
+                p = "L%s %s"%(pos[0], pos[1])
             svg_path.append(p)
-    
+
     return " ".join(svg_path)
 
 
@@ -53,6 +53,22 @@ def process_sentence(sentence):
         mapped_locs_d[key] = item
     return mapped_locs_d
 
+def word2Strokes(word):
+    d = Drawing.objects.filter(word=word).order_by('?').first()
+    serializer = DrawingSerializer(d)
+    strokes = serializer.data['drawing']
+    return strokes
+
+def locationDict(preposition): # maps prepositions to directions
+    dict = {"on" : ["up"], "above":["up"],"under" : ["down"], "beneath":["down"],"beside":["right","left"]}
+    try:
+        return random.choice(dict[preposition])
+    except:
+        return "right"
+
+def phrase2Strokes(object,loc): #object = dict key, loc= value
+    strokes = word2Strokes(object)
+    print(strokes)
 
 
 @api_view(['GET'])
@@ -68,11 +84,9 @@ def DetailDrawing(request, sentence, format=None):
         # TEMP USE
         word = list(mapped_locs_d.keys())[0]
         #get by word
-        d = Drawing.objects.filter(word=word).order_by('?').first()
-        serializer = DrawingSerializer(d)
-        strokes = serializer.data['drawing']
-        strokes = strokes2svgpath(strokes)
-        return Response(strokes)
+        strokes = word2Strokes(word)
+        path = strokes2svgpath(strokes)
+        return Response(path)
     except:
          # TO DO better error handling
         return Response("M150 0 L75 200 L225 200 Z")
