@@ -9,12 +9,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 import gensim.downloader as gensimapi
+from quickdraw.parse_sentence import *
 
 # global parameters
 print("Loading word2vec model")
 WORD_MODEL = gensimapi.load("glove-wiki-gigaword-50")
 print("Loading complete")
 OBJS = [l.strip() for l in open(os.path.join(settings.PROJECT_ROOT, "objs_list.csv"))]
+NLP = spacy.load('en')
 
 
 def most_similar_word(word):
@@ -42,18 +44,30 @@ def strokes2svgpath(strokes):
     return " ".join(svg_path)
 
 
+def process_sentence(sentence):
+    doc = NLP(sentence)
+    locs_d = sentence_to_loc(doc)
+    mapped_locs_d = {}
+    for key, item in locs_d.items():
+        key = most_similar_word(key)
+        mapped_locs_d[key] = item
+    return mapped_locs_d
+
+
+
 @api_view(['GET'])
 def DetailDrawing(request, sentence, format=None):
     """
     List all code snippets, or create a new snippet.
     """
     # TO DO tokenize, word2vector processing
-    word = sentence
-    if word not in OBJS:
-        word = most_similar_word(word)
+    mapped_locs_d = process_sentence(sentence)
+#    return Response(mapped_locs_d)
+    # TEMP USE
+    word = mapped_locs_d.keys[0]
 
     try:
-    #get by word
+        #get by word
         d = Drawing.objects.filter(word=word).order_by('?').first()
         serializer = DrawingSerializer(d)
         strokes = serializer.data['drawing']
