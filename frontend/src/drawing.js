@@ -1,5 +1,7 @@
 import React from 'react';
 import MtSvgLines from 'react-mt-svg-lines';  
+import SVG from 'react-inlinesvg';
+import vandyhacklogo from './assets/vandyhack.logo.svg'
 
 
 class DrawArea extends React.Component {
@@ -43,19 +45,31 @@ class DrawArea extends React.Component {
     render() {
         if (this.state.profileOrError === null) {
             return (<div>loading...</div>);
-        } else {
-            const { offset } = this.state
-            return (
-                <div className='drawarea'>
-                <MtSvgLines animate={ true } duration={ 2000 }>
-                    <svg x="0" y="0" viewBox="0 0 500 500" >
-                        <path d={this.state.svg_path}/>
-                            {/* {this.props.svg_path.map(item => (<path d={item} />))} */}
-                    </svg>
-                </MtSvgLines>
-                </div>
-            );
-                    }
+        } 
+        
+        else {
+
+            if (this.props.EnteredText.includes('hack') | this.props.EnteredText.includes('vand')) {
+                return(          
+                     <div className='hacklogo'>
+                        <SVG className='hacklogosvg' src={vandyhacklogo}></SVG>
+                    </div>
+                    );
+            } 
+            
+            else {
+                return (
+                    <div className='drawarea'>
+                    <MtSvgLines animate={ true } duration={ 2000 }>
+                        <svg className='drawsvg' x="0" y="0" viewBox="0 0 500 500" >
+                            <path d={this.state.svg_path}/>
+                                {/* {this.state.svg_path.map(item => (<path d={item} />))} */}
+                        </svg>
+                    </MtSvgLines>
+                    </div>
+                );
+            }
+        }
     }
 
   }

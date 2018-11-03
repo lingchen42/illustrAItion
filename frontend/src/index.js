@@ -5,6 +5,7 @@ import Logo from "./logo.js"
 import DrawArea from "./drawing.js"
 import Input from "./input.js"
 
+
 const API = "http://127.0.0.1:8000/api/"
 
 class App extends React.Component {
@@ -12,7 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       inputText: 'default',
-      EnteredText: 'cat',
+      EnteredText: 'vandy hack',
       strokes: ''
     };
   }
