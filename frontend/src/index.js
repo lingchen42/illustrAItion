@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       inputText: 'default',
       EnteredText: 'vandy hack',
-      strokes: ''
+      strokes: []
     };
   }
 
