@@ -17,6 +17,7 @@ print("Loading word2vec model")
 WORD_MODEL = gensimapi.load("glove-wiki-gigaword-50")
 print("Loading complete")
 OBJS = [l.strip() for l in open(os.path.join(settings.PROJECT_ROOT, "objs_list.csv"))]
+OBJS.extend(['hack', 'vandy', 'vanderbilt', 'hackthon'])
 NLP = spacy.load('en')
 
 
@@ -42,6 +43,8 @@ def most_similar_word(word):
        dist = WORD_MODEL.wmdistance(word, obj)
        if dist < most_sim_word[0]:
            most_sim_word = (dist, obj)
+
+#    if not most_sim_word[1]:
    return most_sim_word[1]
 
 

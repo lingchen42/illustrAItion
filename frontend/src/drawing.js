@@ -3,6 +3,7 @@ import MtSvgLines from 'react-mt-svg-lines';
 import SVG from 'react-inlinesvg';
 //import vandyhacklogo from './assets/vandyhack.logo.svg'
 import vandyhacklogo from './assets/vhv.svg'
+import octocat from './assets/vh_Octocat.svg'
 
 
 class DrawArea extends React.Component {
@@ -49,14 +50,10 @@ class DrawArea extends React.Component {
         } 
         
         else {
-
-            if (this.props.EnteredText.includes('hack') | this.props.EnteredText.includes('vand')) {
+            if (this.props.EnteredText.includes('octocat') | this.props.EnteredText.includes('octo')) {
                 return(          
                      <div className='hacklogo'>
-                        {/*<SVG className='hacklogosvg' src={vandyhacklogo}></SVG> */}
-                        <svg className='hacklogosvg' fill='none' viewbox="0 0 1000 1000">
-                            <path stroke='black' strokeWidth='8' d="M7.631 0 L88.194 179 L169.29 0 M32.363 0 L103 142 M190 0 L150 84 M142 104 L103 189 M210 0 L120 189"/>
-                        </svg>
+                        <SVG src={octocat}></SVG>
                     </div>
                     );
             } 
