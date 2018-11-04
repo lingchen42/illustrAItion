@@ -14,7 +14,7 @@ Have you ever had this great story that only lacked for illustrations, but were 
 
 ## How It Works
 <p align="center">
-  <img src="https://github.com/lingchen42/illustrAItion/blob/master/pipeline.png" width="600"/>
+  <img src="https://github.com/lingchen42/illustrAItion/blob/master/pipeline.png" width="800"/>
 </p>
 
 ### Doodle Data
