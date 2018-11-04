@@ -1,7 +1,7 @@
 # illustrAItion
 **Vandyhacks V** project
 
-Ling Chen, Laura Colbran, and Ying Ji
+By Ling Chen, Laura Colbran, and Ying Ji
 
 ## What is illustrAItion?
 Have you ever had this great story that only lacked for illustrations, but were missing the will or desire to draw something? Despair no more, for we bring you **illustrAItion**, the AI-informed web tool for generating illustrations automatically. Simply enter the phrase you want to be sketched, and **illustrAItion** will assemble a matching picture from doodles generated as part of the Google QuickDraw experiment. 
@@ -22,9 +22,9 @@ The input and ouput of the API call is processed using the Django Python Library
 - Animating the drawing stroke by stroke (unsolved)
 
 ## Accomplishments that we're proud of
-- Each other
 - We got a lot done this weekend, which is surprising given our complete lack of background in this area
 - The current product looks like we imagined it
+- Each other
 
 ## What we learned
 - None of us knew anything about web development before planning this project
