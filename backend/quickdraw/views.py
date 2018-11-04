@@ -72,7 +72,8 @@ def locationDict(preposition): # maps prepositions to directions
     dict = {"on" : ["up"], "above":["up"],"under" : ["down"],"below":["down"],
         "beneath":["down"],"beside":["right","left"],"by":["left","right"],
         "against":["right","left"],"before":["left","right"],"after":["left","right"],
-        "over":["up"],"alone":["alone"]}
+        "over":["up"],"alone":["alone"], "in":["right", "left"], 
+        "at":["right", "left"], 'near':['right', 'left']}
     try:
         return random.choice(dict[preposition])
     except:
