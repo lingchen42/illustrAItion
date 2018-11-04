@@ -4,7 +4,8 @@
 By Ling Chen, Laura Colbran, and Ying Ji
 
 ## What is illustrAItion?
-Have you ever had this great story that only lacked for illustrations, but were missing the will or desire to draw something? Despair no more, for we bring you **illustrAItion**, the AI-informed web tool for generating illustrations automatically. Simply enter the phrase you want to be sketched, and **illustrAItion** will assemble a matching picture from doodles generated as part of the Google QuickDraw experiment. 
+Have you ever had this great story that only lacked for illustrations, but were missing the will or desire to draw something? Despair no more, for we bring you **illustrAItion**, the AI-informed web tool for generating illustrations automatically. Simply enter the phrase you want to be sketched, and **illustrAItion** will assemble a matching picture from doodles generated as part of the Google QuickDraw experiment. **illustraAItion** currently support two languages, Chinese and English. 
+
 
 ## How It Works
 ### Doodle Data
@@ -19,6 +20,7 @@ The input and ouput of the API call is processed using the Django Python Library
 ## Challenges we ran into
 - The spatial arrangement of more than two drawings (solved!)
 - Converting NLP-generated trees to a more usable format (solved!)
+- Support Chinese text inpu (solved!)
 - Animating the drawing stroke by stroke (unsolved)
 
 ## Accomplishments that we're proud of
