@@ -1,7 +1,7 @@
 # illustrAItion
-**Vandyhacks V** project
+<img src="https://github.com/lingchen42/illustrAItion/blob/master/frontend/src/assets/logo.svg" alt="logo" width="300"/>
 
-By Ling Chen, Laura Colbran, and Ying Ji
+A **Vandyhacks V** project by Ling Chen, Laura Colbran, and Ying Ji
 
 ## What is illustrAItion?
 Have you ever had this great story that only lacked for illustrations, but were missing the will or desire to draw something? Despair no more, for we bring you **illustrAItion**, the AI-informed web tool for generating illustrations automatically. Simply enter the phrase you want to be sketched, and **illustrAItion** will assemble a matching picture from doodles generated as part of the Google QuickDraw experiment. **illustraAItion** currently support two languages, Chinese and English. 
@@ -35,6 +35,7 @@ The input and ouput of the API call is processed using the Django Python Library
 - We learned the details of how SVGs work and how to generate them
 
 ## What's Next?
-- Support for languages other than English
+- Support more languages
+- Resize the objects for a better spatial arrangment
 - Amazon Alexa voice-to-text-to-doodle
 - Style transformation of the drawing to your favourite artistic style
