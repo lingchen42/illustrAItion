@@ -39,6 +39,14 @@ def get_first_level_pairs(doc):
     return first_level_pairs, set(parent_nouns)
 
 
+def get_nouns(doc):
+    word_locs = {}
+    for token in list(doc):
+        if token.pos_ == "NOUN":
+            word_locs[token.text] = [['', 'alone']]
+    return word_locs
+
+
 def sentence_to_loc(doc):
     '''
     Only works for noun dependence tree with depth of 2
