@@ -26,6 +26,7 @@ The input and ouput of the API call is processed using the Django Python Library
 ## Accomplishments that we're proud of
 - We got a lot done this weekend, which is surprising given our complete lack of background in this area
 - The current product looks like we imagined it
+- We implemented bonus drawings hiding in the database! 
 - Each other
 
 ## What we learned
