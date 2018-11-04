@@ -6,9 +6,16 @@ A **Vandyhacks V** project by Ling Chen, Laura Colbran, and Ying Ji
 ## What is illustrAItion?
 Have you ever had this great story that only lacked for illustrations, but were missing the will or desire to draw something? Despair no more, for we bring you **illustrAItion**, the AI-informed web tool for generating illustrations automatically. Simply enter the phrase you want to be sketched, and **illustrAItion** will assemble a matching picture from doodles generated as part of the Google QuickDraw experiment. **illustraAItion** currently support two languages, Chinese and English. 
 
+## Demo
+<p align="center">
+  <img src="https://github.com/lingchen42/illustrAItion/blob/master/demo.gif" alt="logo" width="600"/>
+</p>
+
 
 ## How It Works
-<div style="text-align:center"><img src="https://github.com/lingchen42/illustrAItion/blob/master/pipeline.png" width="900"/></div>
+<p align="center">
+  <img src="https://github.com/lingchen42/illustrAItion/blob/master/pipeline.png" width="600"/>
+</p>
 
 ### Doodle Data
 **illustrAItion** is built on the back of a database assembled from doodles submitted via the Google Quick, Draw! game (`https://quickdraw.withgoogle.com/`). For this game, people are instructed to (quickly) draw the word that the game displays on the screen. The drawings were previously curated using a convolutional neural network to identify the best examples of each word, resulting in 340,000 high-quality (_or at least recognizable..._) doodles, each matched to their word. **N.B.** We do not consider the generation of this database part of **illustrAItion**, since it predates Vandyhacks V, and can be used for many other things as well.
