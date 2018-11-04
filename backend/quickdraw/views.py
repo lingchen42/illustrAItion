@@ -20,15 +20,6 @@ OBJS = [l.strip() for l in open(os.path.join(settings.PROJECT_ROOT, "objs_list.c
 NLP = spacy.load('en')
 
 
-def most_similar_word(word):
-    most_sim_word = (np.inf, '')
-    for obj in OBJS:
-        dist = WORD_MODEL.wmdistance(word, obj)
-        if dist < most_sim_word[0]:
-            most_sim_word = (dist, obj)
-    return most_sim_word[1]
-
-
 def strokes2svgpath(strokes):
     svg_path = []
     for stroke in strokes:
@@ -42,20 +33,34 @@ def strokes2svgpath(strokes):
     return " ".join(svg_path)
 
 
+def most_similar_word(word):
+   if word.lower() in OBJS:
+       return word
+
+   most_sim_word = (np.inf, '')
+   for obj in OBJS:
+       dist = WORD_MODEL.wmdistance(word, obj)
+       if dist < most_sim_word[0]:
+           most_sim_word = (dist, obj)
+   return most_sim_word[1]
+
+
 def process_sentence(sentence):
-    doc = NLP(sentence)
-    locs_d = sentence_to_loc(doc)
-    mapped_locs_d = {}
-    for key, item in locs_d.items():
-        key = most_similar_word(key)
-        mapped_locs_d[key] = item
-    return mapped_locs_d
+   doc = NLP(sentence)
+   locs_d = sentence_to_loc(doc)
+   mapped_locs_d = {}
+   for key, items in locs_d.items():
+       key = most_similar_word(key)
+       mapped_items = []
+       for item in items:
+           mapped_items.append([most_similar_word(item[0]), item[1]])
+       mapped_locs_d[key] = mapped_items
+   return mapped_locs_d
 
 def word2Strokes(word):
     d = Drawing.objects.filter(word=word).order_by('?').first()
     serializer = DrawingSerializer(d)
     strokes = serializer.data['drawing']
-    print(strokes)
     if isinstance(strokes, str):
         strokes = ast.literal_eval(strokes)
     return strokes
@@ -87,23 +92,63 @@ def adjustStrokes(strokes, amount, coord):
             stroke[1] = [y+amount for y in stroke[1]]
     return strokes
 
-def phrase2Strokes(object1,object2,loc): #object = dict key, loc= value
+def phrase2Strokes(strokes,object1,object2,loc,drawn): #object = dict key, loc= value
     location = locationDict(loc)
+    rm_inds = [0,0]
     print(object1, object2, location)
     if location == "up":
-        strokes = word2Strokes(object1)
+        if drawn == "obj1":
+            rm_inds[0] = len(strokes)
+        strokes.extend(word2Strokes(object1))
+        if drawn == "obj1":
+            rm_inds[1] = len(strokes)
+        elif drawn == "obj2":
+            rm_inds[0] = len(strokes)
         strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"y"))
+        if drawn == "obj2":
+            rm_inds[1] = len(strokes)
     elif location == "down":
-        strokes = word2Strokes(object2)
+        if drawn == "obj2":
+            rm_inds[0] = len(strokes)
+        strokes.extend(word2Strokes(object2))
+        if drawn == "obj1":
+            rm_inds[0] = len(strokes)
+        elif drawn == "obj2":
+            rm_inds[1] = len(strokes)
         strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"y"),"y"))
+        if drawn == "obj1":
+            rm_inds[1] = len(strokes)
     elif location == "right":
-        strokes = word2Strokes(object2)
+        if drawn == "obj2":
+            rm_inds[0] = len(strokes)
+        strokes.extend(word2Strokes(object2))
+        if drawn == "obj1":
+            rm_inds[0] = len(strokes)
+        elif drawn == "obj2":
+            rm_inds[1] = len(strokes)
         strokes.extend(adjustStrokes(word2Strokes(object1),getMaxBound(strokes,"x"),"x"))
+        if drawn == "obj1":
+            rm_inds[1] = len(strokes)
     elif location == "left":
-        strokes = word2Strokes(object1)
+        if drawn == "obj1":
+            rm_inds[0] = len(strokes)
+        strokes.extend(word2Strokes(object1))
+        if drawn == "obj1":
+            rm_inds[1] = len(strokes)
+        elif drawn == "obj2":
+                rm_inds[0] = len(strokes)
         strokes.extend(adjustStrokes(word2Strokes(object2),getMaxBound(strokes,"y"),"x"))
+        if drawn == "obj2":
+            rm_inds[1] = len(strokes)
     else:
-        strokes = word2Strokes(object1)
+        strokes.extend(word2Strokes(object1))
+        if drawn == "obj1":
+            rm_inds = [0,len(strokes)]
+    if drawn != "none": #if object1 or object2 was drawn in a previous call, remove strokes
+        if rm_inds[0] == 0:
+            del strokes[:rm_inds[1]]
+        else:
+            del strokes[rm_inds[0]:rm_inds[1]]
     return strokes
 
 
@@ -119,13 +164,20 @@ def DetailDrawing(request, sentence, format=None):
     drawn = []
     strokes = []
     for word1 in mapped_locs_d.keys():
+        print(drawn)
         if word1 not in drawn:
-            drawn.append(word1)
             print(mapped_locs_d[word1])
             for pair in mapped_locs_d[word1]:
-                if pair[0] not in drawn:
+                if pair[0] not in drawn and (word1 not in drawn):
                     drawn.append(pair[0])
-                    strokes.extend(phrase2Strokes(word1,pair[0],pair[1]))
+                    drawn.append(word1)
+                    strokes= phrase2Strokes(strokes,word1,pair[0],pair[1],"none")
+                elif pair[0] not in drawn and (word1 in drawn):
+                    drawn.append(pair[0])
+                    strokes= phrase2Strokes(strokes,word1,pair[0],pair[1],"obj1")
+                elif pair[0] in drawn and (word1 not in drawn):
+                    drawn.append(word1)
+                    strokes= phrase2Strokes(strokes,word1,pair[0],pair[1],"obj2")
     path = strokes2svgpath(strokes)
     return Response([path])
     #except:
