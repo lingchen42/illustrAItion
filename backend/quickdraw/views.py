@@ -22,7 +22,7 @@ OBJS = [l.strip() for l in open(os.path.join(settings.PROJECT_ROOT, "objs_list.c
 OBJS.extend(['hack', 'hacker', 'vandy', 'vanderbilt', 'hackthon'])
 NLP = spacy.load('en')
 HUMAN_LIST = ['i', 'you', 'he', 'she', 'girl', 'boy', 'lady', 'guy', 'person', 
-               'we', 'us']
+               'we', 'us', 'man']
 
 
 def strokes2svgpath(strokes):
