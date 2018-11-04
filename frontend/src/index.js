@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       inputText: 'default',
-      EnteredText: 'vandy hack',
+      EnteredText: 'empty',
       strokes: []
     };
   }

@@ -19,7 +19,7 @@ print("Loading word2vec model")
 WORD_MODEL = gensimapi.load("glove-wiki-gigaword-50")
 print("Loading complete")
 OBJS = [l.strip() for l in open(os.path.join(settings.PROJECT_ROOT, "objs_list.csv"))]
-OBJS.extend(['hack', 'vandy', 'vanderbilt', 'hackthon'])
+OBJS.extend(['hack', 'hacker', 'vandy', 'vanderbilt', 'hackthon'])
 NLP = spacy.load('en')
 HUMAN_LIST = ['i', 'you', 'he', 'she', 'girl', 'boy', 'lady', 'guy', 'person', 
                'we', 'us']
@@ -241,7 +241,8 @@ def DetailDrawing(request, sentence, format=None):
         return Response([path])
     except:
          # TO DO better error handling
-        return Response([strokes2svgpath(word2Strokes('hack'))])
+#        return Response([strokes2svgpath(word2Strokes('hack'))])
+         return Response([''])
 
 
 class DrawingList(generics.ListCreateAPIView):
