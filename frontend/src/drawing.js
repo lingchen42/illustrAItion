@@ -62,7 +62,7 @@ class DrawArea extends React.Component {
                 try {
                     return (
                         <div className='drawarea'>
-                        <MtSvgLines animate={ true } duration={ 2000 }>
+                        <MtSvgLines animate={ true } duration={ 6000 }>
                             <svg className='drawsvg' x="0" y="0" viewBox="0 0 1000 1500" >
                                 {/* <path d={this.state.svg_path}/> */}
                                 {this.state.svg_path.map(item => (<path d={item} />))}
