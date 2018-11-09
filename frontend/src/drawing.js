@@ -68,6 +68,7 @@ class DrawArea extends React.Component {
                                 {this.state.svg_path.map(item => (<path d={item} />))}
                             </svg>
                         </MtSvgLines>
+                        <p>hello</p>
                         </div>
                     );
                  } catch (e) {
@@ -75,6 +76,7 @@ class DrawArea extends React.Component {
                     return(
                     <div className='hacklogo'>
                         <SVG className='hacklogosvg' src={vandyhacklogo}></SVG>
+                        <p>hello</p>
                     </div> 
                     );
                 }

@@ -6,7 +6,7 @@ import DrawArea from "./drawing.js"
 import Input from "./input.js"
 
 
-const API = "https://chenling.localhost.run/api/"
+const API = "http://127.0.0.1:8000/api/"
 
 class App extends React.Component {
   constructor(props) {
