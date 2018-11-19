@@ -26,23 +26,6 @@ We built the frontend of **illustrAItion** using the React JavaSript Library (`h
 ### Backend
 The input and ouput of the API call is processed using the Django Python Library (`https://www.djangoproject.com/`). The typed phrase is processed into pairs of words connected by a positional preposition using either NLTK (`https://www.nltk.org/`) or SpaCy (`https://spacy.io/`). It then checks to make sure there is a drawing of each word in the doodle database. In the absence of one, it uses the Gensim library to fetch the most similar word. Once the individual drawing are pulled from the database in the form of SVG paths, these are combined such that the individual drawings are arranged to reflect the positional preposition connecting them. This combined path is then returned to the frontend for display.
 
-## Challenges we ran into
-- The spatial arrangement of more than two drawings (solved!)
-- Converting NLP-generated trees to a more usable format (solved!)
-- Support Chinese text inpu (solved!)
-- Animating the drawing stroke by stroke (unsolved)
-
-## Accomplishments that we're proud of
-- We got a lot done this weekend, which is surprising given our complete lack of background in this area
-- The current product looks like we imagined it
-- We implemented bonus drawings hiding in the database! 
-- Each other
-
-## What we learned
-- None of us knew anything about web development before planning this project
-- We had not used natural language processing before either
-- We learned the details of how SVGs work and how to generate them
-
 ## What's Next?
 - Support more languages
 - Resize the objects for a better spatial arrangment
