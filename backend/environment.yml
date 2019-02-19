@@ -78,7 +78,6 @@ dependencies:
     - cheroot==6.5.4
     - cherrypy==18.1.0
     - click==7.0
-    - en-core-web-sm==2.0.0
     - feedparser==5.2.1
     - filelock==3.0.10
     - future==0.17.1
