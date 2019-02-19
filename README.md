@@ -11,6 +11,43 @@ Have you ever had this great story that only lacked for illustrations, but were 
   <img src="https://github.com/lingchen42/illustrAItion/blob/master/demo.gif" alt="logo" width="600"/>
 </p>
 
+## Install locally
+
+1. Set up backend environment with Anaconda3 (https://www.anaconda.com/distribution/#download-section)
+```
+# enter the backend dir
+cd backend 
+
+# create an virtual environment with required packages
+conda env create -f environment.yml
+
+# activate the environment
+source activate illustraition
+
+# download requried dataset for language processing
+python -m spacy download en
+ 
+# Run backend server; it will load the word2vec model for ~30sec, then start server at http://127.0.0.1:8000/
+python manage.py runserver
+```
+
+2. Set up frontend environment
+```
+# enter the frontend dir
+cd ../frontend
+
+# set npm to use python2
+npm config set python python2.7   # it has to be python2
+
+# install required packages
+npm install
+
+# run server
+npm start  # http://localhost:3000/
+```
+
+3. The website will be alive at http://localhost:3000/ 
+
 
 ## How It Works
 <p align="center">
