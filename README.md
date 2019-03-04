@@ -11,7 +11,7 @@ Have you ever had this great story that only lacked for illustrations, but were 
   <img src="https://github.com/lingchen42/illustrAItion/blob/master/demo.gif" alt="logo" width="600"/>
 </p>
 
-## Install locally
+## Install locally through conda environment.yml
 
 1. Set up backend environment with Anaconda3 (https://www.anaconda.com/distribution/#download-section)
 ```
@@ -47,6 +47,36 @@ npm start  # http://localhost:3000/
 ```
 
 3. The website will be alive at http://localhost:3000/ 
+
+
+## Install locally manually
+1. Install backend required python packages
+```
+Required packages:
+django
+djangorestframework
+django-cors-headers
+numpy
+spacy
+translate
+nltk
+gensim
+pattern
+```
+2. Set up frontend environment
+```
+# enter the frontend dir
+cd ../frontend
+
+# set npm to use python2
+npm config set python python2.7   # it has to be python2
+
+# install required packages
+npm install
+
+# run server
+npm start  # http://localhost:3000/
+```
 
 
 ## How It Works
