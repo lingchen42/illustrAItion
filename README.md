@@ -53,6 +53,7 @@ npm start  # http://localhost:3000/
 1. Install backend required python packages
 ```
 #Required packages:
+mysqlclient
 django
 djangorestframework
 django-cors-headers
@@ -64,6 +65,7 @@ gensim
 pattern
 langdetect
 ```
+
 2. Set up frontend environment
 ```
 # enter the frontend dir
@@ -79,6 +81,15 @@ npm install
 npm start  # http://localhost:3000/
 ```
 
+### Potential Installation errors
+1. SSL certificate error:
+https://stackoverflow.com/questions/41348621/ssl-error-downloading-nltk-data
+2. `django` cannot load `six` error:
+Consider use lower version `django`, such `2.1.7`
+3. `smart_open` cannot load `open` error:
+Update `smart_open` to the newest version
+4. Other software version error:
+Consider change the versions to make them compatible.
 
 ## How It Works
 <p align="center">
