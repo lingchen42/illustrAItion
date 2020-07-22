@@ -31,7 +31,7 @@ python -m spacy download en
 python manage.py runserver
 ```
 
-2. Set up frontend environment
+3. Set up frontend environment
 ```
 # enter the frontend dir
 cd ../frontend
@@ -52,7 +52,7 @@ npm start  # http://localhost:3000/
 ## Install locally manually
 1. Install backend required python packages
 ```
-Required packages:
+#Required packages:
 django
 djangorestframework
 django-cors-headers
@@ -62,6 +62,7 @@ translate
 nltk
 gensim
 pattern
+langdetect
 ```
 2. Set up frontend environment
 ```
