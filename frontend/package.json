@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "immutable": "^3.8.2",
-    "node-sass": "^4.9.4",
+    "node-sass": "^7.0.0",
     "react": "^16.6.0",
     "react-data-fetching": "^0.2.4",
     "react-dom": "^16.6.0",
